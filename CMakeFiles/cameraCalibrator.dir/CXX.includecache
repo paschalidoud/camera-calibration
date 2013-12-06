@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/despoina/opencv_projects/stereo_calibration/src/monocularCameraCalibrator.cpp
+monocularCameraCalibrator.h
+/home/despoina/opencv_projects/stereo_calibration/src/monocularCameraCalibrator.h
+
+/home/despoina/opencv_projects/stereo_calibration/src/stereoCameraCalibrator.cpp
+stereoCameraCalibrator.h
+/home/despoina/opencv_projects/stereo_calibration/src/stereoCameraCalibrator.h
+
