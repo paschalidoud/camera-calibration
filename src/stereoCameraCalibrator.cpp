@@ -1,6 +1,5 @@
 #include "stereoCameraCalibrator.h"
 
-
 /**
  @brief Constructor, initializes left and right camera device id
  @return void
@@ -11,7 +10,12 @@ stereoCameraCalibrator::stereoCameraCalibrator(int device1, int device2)
 	rightCamera = new  monocularcameraCalibrator(device2);
 
   stereocalibrationflag=false;
-   
+}
+
+//!<Destructor
+stereoCameraCalibrator::~stereoCameraCalibrator()
+{
+  std::cout<<"stereo camera calibrator instance deleted"<<std::endl;
 }
 
 /**
@@ -193,17 +197,17 @@ void stereoCameraCalibrator::undistort()
  @param circleSize [int] raduis of each circle in circleboard
  @return void
 */
-void stereoCameraCalibrator::stereosetPoints(int patternchoice,Size patternsize,Size circlepatternsize,int squareSize,int circleSize)
+void stereoCameraCalibrator::stereosetPoints(int patternchoice,cv::Size patternsize,cv::Size circlepatternsize,int squareSize,int circleSize)
 {
   //!< Set object points
-  vector<Point3f> obj;
+  std::vector<cv::Point3f> obj;
   if(patternchoice==1)
   {
       for( int j = 0; j < patternsize.height; j++ )
       {
         for( int k = 0; k < patternsize.width; k++ )
         {
-         obj.push_back(Point3f(float(j*squareSize), float(k*squareSize), 0));
+         obj.push_back(cv::Point3f(float(j*squareSize), float(k*squareSize), 0));
         }
       }
   }
@@ -213,7 +217,7 @@ void stereoCameraCalibrator::stereosetPoints(int patternchoice,Size patternsize,
       {
           for( int j = 0; j < circlepatternsize.width; j++ )
           {
-          obj.push_back(Point3f(float((2*j + i % 2)*circleSize), float(i*circleSize), 0));
+          obj.push_back(cv::Point3f(float((2*j + i % 2)*circleSize), float(i*circleSize), 0));
           }
       }
   }
@@ -230,7 +234,7 @@ void stereoCameraCalibrator::stereosetPoints(int patternchoice,Size patternsize,
      stereoimagePoints[0].push_back(leftCamera->centers);
      stereoimagePoints[1].push_back(rightCamera->centers);
   }
-  cout<<"Object and Image Points are stored"<<endl;
+  std::cout<<"Object and Image Points are stored"<<std::endl;
 }
 
 /**
@@ -270,8 +274,9 @@ void stereoCameraCalibrator:: stereoCalibrate(int patternchoice,cv::Size pattern
       }
       if(KeyPressed==115) //!< KeyPressed==s
       {
-         calibratefunction();
-         cv::imshow("calibrated snapshot",greyframe);
+         stereoCalibratefunction();
+         cv::imshow("left calibrated snapshot",leftCamera->greyframe);
+         cv::imshow("right calibrated snapshot",rightCamera->greyframe);
       }
        
      }

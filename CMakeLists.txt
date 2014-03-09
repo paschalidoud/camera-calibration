@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(cameraCalibration)
 find_package( OpenCV REQUIRED )
+
+PROJECT(camera_calibrator) 
+
 include_directories(include)
-add_executable(cameraCalibrator src/stereoCameraCalibrator.cpp
-								   src/monocularCameraCalibrator.cpp
-								   stereoCameraCalibrator.h
-								   monocularCameraCalibrator.h)
-target_link_libraries(cameraCalibrator ${OpenCV_LIBS} )	
+set(SRC
+    src/main.cpp
+    src/stereoCameraCalibrator.cpp
+    src/monocularCameraCalibrator.cpp)    
+add_executable( ${PROJECT_NAME} ${SRC} )
+target_link_libraries( ${PROJECT_NAME}  ${OpenCV_LIBS} )

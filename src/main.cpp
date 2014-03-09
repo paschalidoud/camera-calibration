@@ -1,15 +1,18 @@
-#include "cv.h"
-#include "highgui.h"
+#include "opencv/cv.h"
+#include "opencv/highgui.h"
 #include <iostream>
 #include "opencv2/calib3d/calib3d.hpp"
 #include "monocularCameraCalibrator.h"
-
+#include "stereoCameraCalibrator.h"
 int main()
 {
   //!< Initialize camera id device
   monocularcameraCalibrator *leftCamera = new  monocularcameraCalibrator(0);
   monocularcameraCalibrator *rightCamera = new  monocularcameraCalibrator(1);
-  stereoCameraCalibrator *stereoCamera = new  stereoCameraCalibrate(0,1);
+  stereoCameraCalibrator *stereoCamera = new  stereoCameraCalibrator(0,1);
+  
+  //!< Variable for selecting left's , right's or stereo's camera calibration
+  int choice;
     
   int patternchoice;
   //!< Parameters for square patterns
@@ -94,5 +97,8 @@ int main()
       std::cout<<"If you want to change camera: press 1 for left and 2 for right"<<std::endl;
       std::cin>>choice;
     }      
-  }  
+  } 
+  delete(rightCamera);
+  delete(leftCamera);
+  delete(stereoCamera); 
 }

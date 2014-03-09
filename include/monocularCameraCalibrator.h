@@ -1,12 +1,10 @@
 #ifndef MONOCULARCAMERACALIBRATOR_H
 #define MONOCULARCAMERACALIBRATOR_H
 
-#include "cv.h"
-#include "highgui.h"
+#include "opencv/cv.h"
+#include "opencv/highgui.h"
 #include <iostream>
 #include <vector>
-#include "opencv2/calib3d/calib3d.hpp"
-
 
 class monocularcameraCalibrator
 {

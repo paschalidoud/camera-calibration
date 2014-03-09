@@ -1,11 +1,9 @@
 #ifndef STEREOCAMERACALIBRATOR_H
 #define  STEREOCAMERACALIBRATOR_H
-
-#include "cv.h"
-#include "highgui.h"
+#include "opencv/cv.h"
+#include "opencv/highgui.h"
 #include <iostream>
 #include "opencv2/calib3d/calib3d.hpp"
-
 #include "monocularCameraCalibrator.h"
 
 class stereoCameraCalibrator
