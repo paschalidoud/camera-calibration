@@ -7,9 +7,14 @@
 int main()
 {
   //!< Initialize camera id device
-  monocularcameraCalibrator *leftCamera = new  monocularcameraCalibrator(0);
-  monocularcameraCalibrator *rightCamera = new  monocularcameraCalibrator(1);
-  stereoCameraCalibrator *stereoCamera = new  stereoCameraCalibrator(0,1);
+  int dev1,dev2;
+  std::cout<<"Set left camera device id"<<std::endl;
+  std::cin>>dev1;
+  std::cout<<"Set right camera device id"<<std::endl;
+  std::cin>>dev2;
+  monocularcameraCalibrator *leftCamera = new  monocularcameraCalibrator(dev1);
+  monocularcameraCalibrator *rightCamera = new  monocularcameraCalibrator(dev2);
+  stereoCameraCalibrator *stereoCamera = new  stereoCameraCalibrator(dev1,dev2);
   
   //!< Variable for selecting left's , right's or stereo's camera calibration
   int choice;
