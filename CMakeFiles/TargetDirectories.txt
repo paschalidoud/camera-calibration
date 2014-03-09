@@ -1,1 +1,0 @@
-/home/despoina/opencv_projects/stereo_calibration/CMakeFiles/cameraCalibrator.dir
