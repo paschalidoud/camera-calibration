@@ -6,6 +6,11 @@
 
 int main()
 {
+  //!< Initialize camera id device
+  monocularcameraCalibrator *leftCamera = new  monocularcameraCalibrator(0);
+  monocularcameraCalibrator *rightCamera = new  monocularcameraCalibrator(1);
+  stereoCameraCalibrator *stereoCamera = new  stereoCameraCalibrate(0,1);
+    
   int patternchoice;
   //!< Parameters for square patterns
   cv::Size patternsize;
@@ -51,8 +56,43 @@ int main()
     std::cin>>circleSize;
     circlepatternsize=cv::Size(board_centers_w,board_centers_h);
   }
-  monocularcameraCalibrator *leftCamera = new  monocularcameraCalibrator(0);
-  monocularcameraCalibrator *rightCamera = new  monocularcameraCalibrator(1);
-  leftCamera->monocularCalibrate(patternchoice,patternsize,circlepatternsize,squareSize,circleSize);
-  rightCamera->monocularCalibrate(patternchoice,patternsize,circlepatternsize,squareSize,circleSize);
+  
+  std::cout<<"Choose camera for calibration"<<std::endl;
+  std::cout<<"If you want to calibrate left camera press 1"<<std::endl;
+  std::cout<<"If you want to calibrate right camera press 2"<<std::endl;
+  std::cout<<"If you want to calibrate stereo camera press 3"<<std::endl;
+  std::cin>>choice;
+  while(1)
+  {
+    while(choice==1)
+    {
+      std::cout<<"Left camera's calibration begins"<<std::endl;
+      while(1)
+      {
+        leftCamera->monocularCalibrate(patternchoice,patternsize,circlepatternsize,squareSize,circleSize);
+      }
+      std::cout<<"If you want to change camera: press 2 for right and 3 for stereo"<<std::endl;
+      std::cin>>choice;
+    } 
+    while(choice==2)
+    {
+      std::cout<<"Right camera's calibration begins"<<std::endl;
+      while(1)
+      {   
+        rightCamera->monocularCalibrate(patternchoice,patternsize,circlepatternsize,squareSize,circleSize);
+      }
+      std::cout<<"If you want to change camera: press 1 for left and 3 for stereo"<<std::endl;
+      std::cin>>choice;
+    }
+    while(choice==3)
+    {
+      std::cout<<"Stereo camera's calibration begins"<<std::endl;
+      while(1)
+      {
+        stereoCamera->stereoCalibrate(patternchoice,patternsize,circlepatternsize,squareSize,circleSize);
+      }
+      std::cout<<"If you want to change camera: press 1 for left and 2 for right"<<std::endl;
+      std::cin>>choice;
+    }      
+  }  
 }
